@@ -45,7 +45,7 @@ section {
 
 #mainHeading .tgcsa li {
 	display: inline-block;
-	background-image: url(https://m.lekkeslaap.co.za/img/tgcsa.svg);
+	background-image: url(https://www.lekkeslaap.co.za/img/snippet/tgcsa.svg);
 	background-repeat: no-repeat;
 	width: 35px;
 	height: 35px;
@@ -62,6 +62,20 @@ section {
 	padding: 6px 0;
 	width: 100%;
 	text-align: center;
+	z-index: 1;
+}
+
+#carousel {
+	display: relative;
+	width: 375px;
+	height: 250px;
+}
+
+#carousel img {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 .info .sectionHeading {

@@ -4,7 +4,7 @@
 	for (let i = 0; i < 5; i++) {
 		starRating.append('<li></li>');
 	}
-
+	
 	const details = {
 		features: {
 			heading: 'Features',
@@ -82,5 +82,23 @@
 				itemsContainer.removeClass('expanded').addClass('collapsed');
 			}
 		});
+	}
+
+	let cycle = 0;
+	
+	const carouselTimer = (images) => {
+		const fadeOutImage = $('#carousel').find('img:visible');
+		if (fadeOutImage.length !== 0) {
+			fadeOutImage.fadeOut('slow');
+		}
+		$(images[cycle % images.length]).fadeIn();
+		cycle++;
+		
+		window.setTimeout(() => carouselTimer(images), 5000);
+	};
+
+	const carouselImg = $('#carousel img');
+	if (carouselImg.length > 0) {
+		carouselTimer(carouselImg);
 	}
 })(jQuery);
