@@ -92,6 +92,14 @@ section {
 	padding-bottom: 5px;
 	margin-bottom: 10px;
 	border-bottom: #9e9d9d solid 1px;
+	cursor: pointer;
+}
+
+.accordian .chevron {
+	width: 10px;
+	height: 10px;
+	float: right;
+	margin-top: 6px;
 }
 
 .accordian .itemsContainer {
@@ -111,4 +119,12 @@ section {
 	width: 10px;
 	height: 10px;
 	margin-right: 5px;
+}
+
+.accordian .collapsed {
+	display: none;
+}
+
+.rotate {
+	transform: rotate(-90deg);
 }

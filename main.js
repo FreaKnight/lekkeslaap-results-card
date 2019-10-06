@@ -55,12 +55,32 @@
 	
 	Object.keys(details).forEach(id => {
 		const detail = details[id];
-		let domElem = `<header>${detail.heading}</header>`;
+		let domElem = `<header>${detail.heading}<img class="chevron rotate" src="assets/chevron-arrow.svg" /></header>`;
 		let items = '';
 		detail.items.forEach(item => {
 			items += `<span class="item"><img class="check" src="assets/correct-symbol.svg" /><div>${item}</div></span>`;
 		});
-		domElem += `<div class="itemsContainer">${items}</div>`;
+		domElem += `<div class="itemsContainer collapsed">${items}</div>`;
 		$(`#${id}`).append(domElem);
 	});
+
+	const accordianHead = $('.accordian header');
+	if (accordianHead.length !== 0) {
+		accordianHead.on('click', evt => {
+			const chevron = $(evt.currentTarget).find('.chevron');
+			const itemsContainer = $(evt.currentTarget).parent().find('.itemsContainer');
+			if (chevron.hasClass('rotate')) { 
+				chevron.removeClass('rotate').addClass('unrotate');
+			}
+			else {
+				chevron.removeClass('unrotate').addClass('rotate');
+			}
+			if (itemsContainer.hasClass('collapsed')) {
+				itemsContainer.removeClass('collapsed').addClass('expanded');
+			}
+			else {
+				itemsContainer.removeClass('expanded').addClass('collapsed');
+			}
+		});
+	}
 })(jQuery);
