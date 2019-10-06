@@ -78,6 +78,41 @@ section {
 	left: 0;
 }
 
+#carouselControls {
+	display: flex;
+	justify-content: space-around;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+#carouselControls span {
+	display: block;
+	background-color: rgba(241,90,36,0);
+	border: #fff solid 4px;
+	border-radius: 10px;
+	width: 10px;
+	height: 10px;
+	margin-bottom: 4px;
+}
+
+#carouselControls .active {
+	background-color: rgb(241,90,36);
+}
+
+#carouselControls #tut {
+	border: none;
+	display: block;
+	width: 90px;
+	color: #777;
+	text-align: center;
+	font-weight: bolder;
+	background-color: #fff;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	margin-bottom: 0;
+}
+
 .info .sectionHeading {
 	display: flex;
 	justify-content: space-between;

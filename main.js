@@ -84,21 +84,76 @@
 		});
 	}
 
+	const carouselImg = $('#carousel img');
+	const carousel = $('#carousel');
+	const carouselControls = $('#carouselControls');
 	let cycle = 0;
-	
-	const carouselTimer = (images) => {
-		const fadeOutImage = $('#carousel').find('img:visible');
+	let timeout;
+	let paused = false;
+
+	const startCycle = () => {
+		timeout = window.setTimeout(() => carouselTimer(carousel, carouselImg), 5000);
+	};
+	const switchImage = (idx) => {
+		const fadeOutImage = carousel.find('img:visible');
 		if (fadeOutImage.length !== 0) {
 			fadeOutImage.fadeOut('slow');
 		}
-		$(images[cycle % images.length]).fadeIn();
+		idx = idx === undefined ? cycle : idx;
+		$(carouselImg[idx % carouselImg.length]).fadeIn();
 		cycle++;
-		
-		window.setTimeout(() => carouselTimer(images), 5000);
+	};
+	
+	const carouselTimer = () => {
+		switchImage();
+		startCycle();
 	};
 
-	const carouselImg = $('#carousel img');
 	if (carouselImg.length > 0) {
-		carouselTimer(carouselImg);
+		carouselTimer();
 	}
+
+	const dotOnClick = evt => {
+		const newActiveDot = $(evt.currentTarget);
+		const imgIdx = newActiveDot.attr('id');
+
+		newActiveDot.parent().find('.active').removeClass('active');
+		newActiveDot.addClass('active');
+		cycle = imgIdx;
+
+		switchImage(imgIdx);
+	};
+
+	const toggleControls = () => {
+		const tut = $('#tut');
+		if (paused) {
+			tut.hide();
+			const numImgs = carouselImg.length;
+			const activeIdx = (cycle - 1) % numImgs;
+			let dots = [];
+			for (let idx = 0; idx < numImgs; idx++)  {
+				const activeClass = idx === activeIdx ? 'class="active"' : '';
+				const dot = $(`<span id="${idx}" ${activeClass}></span>`).bind('click', dotOnClick);
+				dots.push(dot);
+			};
+			carouselControls.append(dots);
+		}
+		else {
+			carouselControls.find('span').not('#tut').remove();
+			tut.show();
+		}
+	}
+
+	carousel.on('click', evt => {
+		if (paused) {
+			paused = false;
+			toggleControls();
+			startCycle(carousel, carouselImg);
+		}
+		else {
+			paused = true;
+			toggleControls();
+			window.clearTimeout(timeout);
+		}
+	});
 })(jQuery);
