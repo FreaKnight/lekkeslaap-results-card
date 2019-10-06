@@ -1,0 +1,10 @@
+{
+  "name": "lekkeslaap-results-card",
+  "version": "1.0.0",
+  "main": "index.html",
+  "repository": "https://github.com/FreaKnight/lekkeslaap-results-card",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}
